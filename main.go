@@ -23,6 +23,10 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("key:", k)
 		fmt.Println("val:", strings.Join(v, ""))
 	}
+	expiration := time.Now()
+	expiration = expiration.AddDate(1, 0, 0)
+	cookie := http.Cookie{Name: "name", Value: "nanasi", Expires: expiration}
+	http.SetCookie(w, &cookie)
 	fmt.Fprintf(w, "Hello World!")
 }
 
